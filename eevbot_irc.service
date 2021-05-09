@@ -1,0 +1,13 @@
+[Unit]
+Description=eevblog_irc_bot
+After=network.target
+
+[Service]
+User=<user>
+Environment=PYTHONUNBUFFERED=1
+WorkingDirectory=/home/<user>/eevbot
+ExecStart=/usr/bin/python /home/<user>/eevbot/austnet_eevbot_ircbot.py
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
