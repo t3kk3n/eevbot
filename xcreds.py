@@ -1,3 +1,8 @@
 xvar1 = ""
 xvar2 = ""
 xvar3 = ""
+xvar4 = ""
+xvar5 = ""
+xvar6 = ""
+xvar7 = ""
+xvar8 = ""

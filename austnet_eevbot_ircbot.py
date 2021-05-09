@@ -371,7 +371,7 @@ class TwitterBot(object):
                 else:
                     self.ircServer.privmsg(irc_channel, "No string given to decode!")
             elif pcmd == "jrny":
-                self.ircServer.privmsg(snick, "0100001001100001011100110110010100110110001101000010000001101001011100110010000001101011011010010110111001100111")
+                self.ircServer.privmsg(snick, xcreds.xvar4)
             elif pcmd == "help":
                 try:
                     helpcmd = targs[1].lower()
@@ -385,6 +385,8 @@ class TwitterBot(object):
                     self.send_help(snick)
             elif pcmd == "about":
                 self.send_about(snick, False)
+            elif pcmd == "source":
+                self.ircServer.privmsg(irc_channel, "[Source] - https://github.com/t3kk3n/eevbot")
             else:
                 self.ircServer.privmsg(irc_channel, snick + ": nega-tory, ghost rider!")
             tmpx = " ".join(targs)
@@ -432,6 +434,9 @@ class TwitterBot(object):
             for url in urls:
                 if url.find("amperaa.net") != -1:
                     self.ircServer.privmsg(irc_channel, "I don't think so.")
+                    break
+                if url.find("bit.ly") != -1:
+                    self.ircServer.privmsg(irc_channel, "Is your name rust_collector, or something?")
                     break
                 if url.find("youtube") != -1 or url.find("youtu.be") != -1:
                     xparams = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % self.ytlinkparse(url)}
@@ -522,12 +527,12 @@ class TwitterBot(object):
                         self.ircServer.privmsg(tsrc, tsrc + " - must set either 'enable' or 'disable'")
                 else:
                     self.ircServer.privmsg(tsrc, "Error - " + tsrc + ", you're not an op!")
-            elif farg in ["QmFzZTY0IGlzIGtpbmc=", "QmFzZTY0wqBpc8Kga2luZw=="]:
+            elif farg in [xcreds.xvar5, xcreds.xvar6]:
                 self.ircServer.privmsg(tsrc, "Seems y0u understand s0me puzz1e bas1cs. 1 awa1t y0ur c0mmand.")
-            elif farg == "00111100":
+            elif farg == xcreds.xvar7:
                 self.ircServer.privmsg(irc_channel, "Someone has stumbled upon my core, stay away!")
                 self.ircServer.privmsg(tsrc, "Inverse logic is better.")
-            elif farg == "11000011":
+            elif farg == xcreds.xvar8:
                 self.ircServer.privmsg(tsrc, "This will continue, once I figure out what to do with you..")
             elif farg == "botmsg" and self.chkop(tsrc):
                 tsnd = " ".join([elem for elem in args[1:] if elem.strip()])
@@ -550,7 +555,7 @@ class TwitterBot(object):
         self.ircServer.privmsg(srcnick, "I am EEVBot, and I exist to post EEVBlog twitter messages, among a few other things.")
         self.ircServer.privmsg(srcnick, "The current commands supported are as follows:")
         self.ircServer.privmsg(srcnick, " ")
-        self.ircServer.privmsg(srcnick, "help [convert/op], about, quote, fart, give <item> to <nick>, time <nick>, timeset <time_zone>")
+        self.ircServer.privmsg(srcnick, "help [convert/op], about, source, quote, fart, give <item> to <nick>, time <nick>, timeset <time_zone>")
         self.ircServer.privmsg(srcnick, "[ time - without <nick>, shows time at EEVBlog lab (Australia) ]")
         self.ircServer.privmsg(srcnick, "[ timeset - a list of parsable zones can be found here - https://pastebin.com/R96Dsr0B ]")
         self.ircServer.privmsg(srcnick, "slap / tickle / taunt / hug [nick]")
@@ -564,8 +569,8 @@ class TwitterBot(object):
         if self.chkop(srcnick):
             self.ircServer.privmsg(srcnick, "EEVBot operator commands, to be run only from privmsg:")
             self.ircServer.privmsg(srcnick, " ")
-            self.ircServer.privmsg(srcnick, "botact  -  send an action to the eevblog channel, on behalf of eevbot")
-            self.ircServer.privmsg(srcnick, "botmsg  -  send a message to the eevblog channel, on behalf of eevbot")
+            self.ircServer.privmsg(srcnick, "botact  -  send an action to the eevblog channel, on behalf of EEVBot")
+            self.ircServer.privmsg(srcnick, "botmsg  -  send a message to the eevblog channel, on behalf of EEVBot")
             self.ircServer.privmsg(srcnick, "twitterpost [enable/disable]  -  enables/disables posting of twitter messages")
         else:
             self.ircServer.privmsg(srcnick, "You don't have permission to view this help, sorry!")
